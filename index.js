@@ -64,7 +64,7 @@ if (require.main === module) {
         );
         const destPath = path.resolve( process.cwd(), destRelPath );
         const successMsg = (`
-Created ${path.basename(destPath)} app at ${path.basename(destPath)}.
+Created ${path.basename(destPath)} app at ${destPath}.
 Suggestion to continue:
 
     cd ./${destRelPath}
