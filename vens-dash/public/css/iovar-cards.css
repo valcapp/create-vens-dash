@@ -1,0 +1,9 @@
+.adderDivHidden{
+    display:none!important;
+}
+.subsGroup{
+    margin-top:8px;
+}
+[class*="AdderDiv"] .btn {
+    margin: auto 3px;
+}

@@ -1,0 +1,13 @@
+node_modules
+__pycache__/
+*.pyc
+/debug.log
+/.env
+/idea.md
+/db/
+/db?/
+/sd?/
+*.?mdl
+/build/vensim*
+/legacy
+/views/debug.ejs

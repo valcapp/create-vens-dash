@@ -1,0 +1,35 @@
+<%- include("partials/header.ejs") %>
+<%- include("partials/navbar.ejs") %>
+
+<link type="text/css" rel="stylesheet" href="/css/links.css">
+
+<div class="jumbotron">
+    <div class="container">
+
+        <h2 class="display-4">Thank you</h2>
+
+
+        <hr class="my-4">
+
+        <p class="lead cmz-links-lead">
+            <label>Lead</label>
+            <textarea class="form-control"></textarea>
+            <output></output>
+        </p>
+
+        <ul id="linksList">
+            <!-- <li> Vensim: <a href="http://vensim.com/">here</a> </li> -->
+        </ul>
+        <button id="addLinkButton"
+            class="editMode editModeHidden
+                btn btn-sm btn-block btn-outline-primary"
+            >Add Link
+        </button>
+    </div>
+</div>
+
+<%- include("partials/designer") %>
+
+<script type="text/javascript" src="/js/links.js"></script>
+
+<%- include("partials/footer") %> 

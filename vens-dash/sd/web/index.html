@@ -1,0 +1,324 @@
+<!DOCTYPE html><head><meta charset = "utf-8">
+<title>placeholder</title>
+
+<style type = "text/css">
+* { 
+  box-sizing: border-box;
+}
+div.sketch {
+  position: relative; 
+}
+.io-slider-box {
+  background-color: white; border: 1px solid gray; font-size: 12px;
+  text-align: center; vertical-align: middle; line-height: 14px;
+}
+.io-slider-slide {
+  padding: 0; margin: 0; -webkit-appearance: none; background: transparent;
+}
+.io-slider-slide::-ms-track {
+  background: transparent; border-color: transparent; color: transparent;
+}
+.io-slider-slide::-webkit-slider-thumb {
+  -webkit-appearance: none; width: 15px; height: 15px;
+  border-radius: 20%; background: blue; cursor: pointer;
+}
+.io-slider-slide::-moz-range-thumb {
+  height: 15px; width: 15px;
+  border-radius: 20%; background: blue; cursor: pointer;
+}
+.io-slider-slide::-ms-thumb {
+  height: 15px; width: 15px;
+  border-radius: 20%; background: blue; cursor: pointer;
+}
+div.io-chart {
+  background: white;
+  border: 1px solid gray;
+}
+div.io-chart > .svg {
+  width: 100%;
+  height: 100%;
+}
+div.topBar * {
+  display: inline-block;
+}
+h1, h3 {
+  margin: 0 9px;
+}
+button.resetAll {
+  padding: 12px 24px;
+  text-align: center;
+  font-size: 16px;
+  margin: 12px;
+}
+</style>
+
+<script type="text/javascript" src="mdl.js"></script>
+<script type="text/javascript" src="vensim_wasm.js"></script>
+<script type="text/javascript" src="wasm-arrays.min.js"></script>
+<script type="text/javascript" src="d3.min.js"></script>
+</head><body>
+<h1>placeholder</h1>
+
+<div class="topBar">
+<h3>powered by <a target="blank" href="https://vensim.com/">Vensim</a></h3>
+<button class="resetAll">Reset All Sliders</button>
+</div>
+
+<div class="sketch">
+<img src="sketch.png"></img>
+<div class="io-slider-box" name="growth rate a" style="position: absolute; top: 171px; left: 408px; width: 64px; height: 14px">
+0.01
+</div>
+<input class="io-slider-slide" style="position: absolute; top: 185px; left: 408px; width: 64px" type="range" name="growth rate a" min="-0.05" max="0.05" value="0.01" step="0.001"></input>
+<div class="io-slider-box" name="initial stock a" style="position: absolute; top: 247px; left: 689px; width: 66px; height: 14px">
+100
+</div>
+<input class="io-slider-slide" style="position: absolute; top: 261px; left: 689px; width: 66px" type="range" name="initial stock a" min="-100" max="200" value="100" step="10"></input>
+<div class="io-slider-box" name="growth rate b" style="position: absolute; top: 245px; left: 420px; width: 64px; height: 14px">
+0.015
+</div>
+<input class="io-slider-slide" style="position: absolute; top: 259px; left: 420px; width: 64px" type="range" name="growth rate b" min="-0.05" max="0.05" value="0.015" step="0.001"></input>
+<div class="io-slider-box" name="initial stock b" style="position: absolute; top: 255px; left: 820px; width: 66px; height: 14px">
+200
+</div>
+<input class="io-slider-slide" style="position: absolute; top: 269px; left: 820px; width: 66px" type="range" name="initial stock b" min="0" max="400" value="200" step="10"></input>
+<div class="io-slider-box" name="growth rate c" style="position: absolute; top: 277px; left: 495px; width: 64px; height: 14px">
+0.025
+</div>
+<input class="io-slider-slide" style="position: absolute; top: 291px; left: 495px; width: 64px" type="range" name="growth rate c" min="-0.05" max="0.05" value="0.025" step="0.001"></input>
+<div class="io-slider-box" name="initial stock c" style="position: absolute; top: 207px; left: 865px; width: 66px; height: 14px">
+50
+</div>
+<input class="io-slider-slide" style="position: absolute; top: 221px; left: 865px; width: 66px" type="range" name="initial stock c" min="-200" max="500" value="50" step="10"></input>
+<div class="io-slider-box" name="initial stock x" style="position: absolute; top: 481px; left: 1153px; width: 66px; height: 14px">
+100
+</div>
+<input class="io-slider-slide" style="position: absolute; top: 495px; left: 1153px; width: 66px" type="range" name="initial stock x" min="-100" max="300" value="100" step="10"></input>
+<div class="io-slider-box" name="growth rate y" style="position: absolute; top: 500px; left: 867px; width: 64px; height: 14px">
+0.015
+</div>
+<input class="io-slider-slide" style="position: absolute; top: 514px; left: 867px; width: 64px" type="range" name="growth rate y" min="-0.05" max="0.05" value="0.015" step="0.001"></input>
+<div class="io-slider-box" name="initial stock y" style="position: absolute; top: 489px; left: 1284px; width: 66px; height: 14px">
+120
+</div>
+<input class="io-slider-slide" style="position: absolute; top: 503px; left: 1284px; width: 66px" type="range" name="initial stock y" min="-300" max="200" value="120" step="10"></input>
+<div class="io-slider-box" name="growth rate z" style="position: absolute; top: 532px; left: 950px; width: 64px; height: 14px">
+0
+</div>
+<input class="io-slider-slide" style="position: absolute; top: 546px; left: 950px; width: 64px" type="range" name="growth rate z" min="-0.05" max="0.05" value="0" step="0.001"></input>
+<div class="io-slider-box" name="initial stock z" style="position: absolute; top: 441px; left: 1329px; width: 66px; height: 14px">
+80
+</div>
+<input class="io-slider-slide" style="position: absolute; top: 455px; left: 1329px; width: 66px" type="range" name="initial stock z" min="0" max="500" value="80" step="10"></input>
+<div class="io-slider-box" name="i factor" style="position: absolute; top: 305px; left: 904px; width: 60px; height: 14px">
+1
+</div>
+<input class="io-slider-slide" style="position: absolute; top: 319px; left: 904px; width: 60px" type="range" name="i factor" min="0" max="10" value="1" step="0.2"></input>
+<div class="io-slider-box" name="growth rate x" style="position: absolute; top: 424px; left: 811px; width: 64px; height: 14px">
+0.01
+</div>
+<input class="io-slider-slide" style="position: absolute; top: 438px; left: 811px; width: 64px" type="range" name="growth rate x" min="-0.05" max="0.05" value="0.01" step="0.001"></input>
+<div class="io-slider-box" name="u reference" style="position: absolute; top: 361px; left: 744px; width: 60px; height: 14px">
+100
+</div>
+<input class="io-slider-slide" style="position: absolute; top: 375px; left: 744px; width: 60px" type="range" name="u reference" min="50" max="500" value="100" step="10"></input>
+<div class="io-slider-box" name="ref stock" style="position: absolute; top: 329px; left: 870px; width: 60px; height: 14px">
+50
+</div>
+<input class="io-slider-slide" style="position: absolute; top: 343px; left: 870px; width: 60px" type="range" name="ref stock" min="-500" max="500" value="50" step="50"></input>
+<div class="io-slider-box" name="g factor" style="position: absolute; top: 268px; left: 937px; width: 60px; height: 14px">
+50
+</div>
+<input class="io-slider-slide" style="position: absolute; top: 282px; left: 937px; width: 60px" type="range" name="g factor" min="0" max="50" value="50" step="0.0001"></input>
+<div class="io-slider-box" name="test without min" style="position: absolute; top: 161px; left: 1077px; width: 76px; height: 14px">
+1
+</div>
+<input class="io-slider-slide" style="position: absolute; top: 175px; left: 1077px; width: 76px" type="range" name="test without min" min="-1" max="5" value="1" step="0.1"></input>
+<div class="io-slider-box" name="test without max" style="position: absolute; top: 179px; left: 1067px; width: 78px; height: 14px">
+1
+</div>
+<input class="io-slider-slide" style="position: absolute; top: 193px; left: 1067px; width: 78px" type="range" name="test without max" min="0" max="2" value="1" step="1"></input>
+<div class="io-slider-box" name="test without unit" style="position: absolute; top: 208px; left: 1060px; width: 76px; height: 14px">
+0.5
+</div>
+<input class="io-slider-slide" style="position: absolute; top: 222px; left: 1060px; width: 76px" type="range" name="test without unit" min="0" max="1" value="0.5" step="0.1"></input>
+<div class="io-slider-box" name=""test ["" style="position: absolute; top: 30px; left: 950px; width: 60px; height: 14px">
+2
+</div>
+<input class="io-slider-slide" style="position: absolute; top: 44px; left: 950px; width: 60px" type="range" name=""test ["" min="0" max="10" value="2" step="1"></input>
+<div class="io-slider-box" name=""test ="" style="position: absolute; top: 84px; left: 1005px; width: 60px; height: 14px">
+2
+</div>
+<input class="io-slider-slide" style="position: absolute; top: 98px; left: 1005px; width: 60px" type="range" name=""test ="" min="0" max="10" value="2" step="1"></input>
+<div class="io-slider-box" name="many subs var" style="position: absolute; top: 291px; left: 1123px; width: 70px; height: 14px">
+0.5
+</div>
+<input class="io-slider-slide" style="position: absolute; top: 305px; left: 1123px; width: 70px" type="range" name="many subs var" min="0" max="1" value="0.5" step="0.05"></input>
+<div class="io-chart" name="stock abc[a,x3]" varname="stock abc[a,x3]" xaxisname="Month" yaxisname="u" style="position: absolute; top: 226px; left: 0px; width: 130px; height: 90px"></div>
+<div class="io-chart" name="stock abc[a,x4]" varname="stock abc[a,x4]" xaxisname="Month" yaxisname="u" style="position: absolute; top: 317px; left: 0px; width: 130px; height: 90px"></div>
+<div class="io-chart" name="stock abc[a,x1]" varname="stock abc[a,x1]" xaxisname="Month" yaxisname="u" style="position: absolute; top: 408px; left: 0px; width: 130px; height: 90px"></div>
+<div class="io-chart" name="stock abc[a,x5]" varname="stock abc[a,x5]" xaxisname="Month" yaxisname="u" style="position: absolute; top: 408px; left: 0px; width: 130px; height: 90px"></div>
+<div class="io-chart" name="stock abc[a,x1]" varname="stock abc[a,x1]" xaxisname="Month" yaxisname="u" style="position: absolute; top: 43px; left: 0px; width: 130px; height: 90px"></div>
+<div class="io-chart" name="stock abc[a,x2]" varname="stock abc[a,x2]" xaxisname="Month" yaxisname="u" style="position: absolute; top: 134px; left: 0px; width: 130px; height: 90px"></div>
+<div class="io-chart" name="stock abc[b,x3]" varname="stock abc[b,x3]" xaxisname="Month" yaxisname="u" style="position: absolute; top: 226px; left: 131px; width: 130px; height: 90px"></div>
+<div class="io-chart" name="stock abc[b,x4]" varname="stock abc[b,x4]" xaxisname="Month" yaxisname="u" style="position: absolute; top: 317px; left: 131px; width: 130px; height: 90px"></div>
+<div class="io-chart" name="stock abc[a,x1]" varname="stock abc[a,x1]" xaxisname="Month" yaxisname="u" style="position: absolute; top: 408px; left: 131px; width: 130px; height: 90px"></div>
+<div class="io-chart" name="stock abc[b,x5]" varname="stock abc[b,x5]" xaxisname="Month" yaxisname="u" style="position: absolute; top: 408px; left: 131px; width: 130px; height: 90px"></div>
+<div class="io-chart" name="stock abc[b,x1]" varname="stock abc[b,x1]" xaxisname="Month" yaxisname="u" style="position: absolute; top: 43px; left: 131px; width: 130px; height: 90px"></div>
+<div class="io-chart" name="stock abc[b,x2]" varname="stock abc[b,x2]" xaxisname="Month" yaxisname="u" style="position: absolute; top: 134px; left: 131px; width: 130px; height: 90px"></div>
+<div class="io-chart" name="stock abc[c,x3]" varname="stock abc[c,x3]" xaxisname="Month" yaxisname="u" style="position: absolute; top: 226px; left: 262px; width: 130px; height: 90px"></div>
+<div class="io-chart" name="stock abc[c,x4]" varname="stock abc[c,x4]" xaxisname="Month" yaxisname="u" style="position: absolute; top: 317px; left: 262px; width: 130px; height: 90px"></div>
+<div class="io-chart" name="stock abc[a,x1]" varname="stock abc[a,x1]" xaxisname="Month" yaxisname="u" style="position: absolute; top: 408px; left: 262px; width: 130px; height: 90px"></div>
+<div class="io-chart" name="stock abc[c,x5]" varname="stock abc[c,x5]" xaxisname="Month" yaxisname="u" style="position: absolute; top: 408px; left: 262px; width: 130px; height: 90px"></div>
+<div class="io-chart" name="stock abc[c,x1]" varname="stock abc[c,x1]" xaxisname="Month" yaxisname="u" style="position: absolute; top: 43px; left: 262px; width: 130px; height: 90px"></div>
+<div class="io-chart" name="stock abc[c,x2]" varname="stock abc[c,x2]" xaxisname="Month" yaxisname="u" style="position: absolute; top: 134px; left: 262px; width: 130px; height: 90px"></div>
+</div>
+
+<script type="text/javascript">
+
+var VensimLoadedFlag = 0;
+
+function OnVensimLoaded()
+	{
+		VensimLoadedFlag = _IsVensimLoaded();
+		runModel(0);
+	}
+
+
+var VensimCharts = [];
+
+function UpdateCharts(run)
+	{
+            var margin = {left: 70, right: 30, top: 30, bottom: 50};
+			d3.selectAll("div.io-chart").each(function() {
+				var div = d3.select(this);
+				var width = parseInt(div.style("width"), 10);
+				var height = parseInt(div.style("height"), 10);
+				var temp = ["0", "0", width, height];
+				div.selectAll("svg").data([0]).join("svg").attr("viewBox", temp.join(","));
+				var chart = div.select("svg");
+				var fTimeVals = GetSeries("Time");
+                                var varname = div.attr("varname");
+				var fVals = GetSeries(varname);
+                                if (!VensimCharts[varname]) {
+                                    VensimCharts[varname] = { runs: [] };
+                                }
+                                var o = VensimCharts[varname];
+                                o.runs[run] = {
+                                    times: fTimeVals,
+                                    vals: fVals,
+                                }
+
+                                var vmin = Number.MAX_VALUE;
+                                var vmax = -Number.MAX_VALUE;
+                                for (r in o.runs) {
+                                    vmin = Math.min(vmin, d3.min(o.runs[r].vals));
+                                    vmax = Math.max(vmax, d3.max(o.runs[r].vals));
+                                }
+                chart.selectAll("text.title")
+                  .data([0])
+                  .join("text").attr("class", "title")
+                  .attr("x", (width - margin.left - margin.right)/2 + margin.left)
+                  .attr("y", (margin.top / 2))
+                  .attr("text-anchor", "middle")
+                  .style("font-size", "16px")
+                  .text(div.attr("name"));
+                var xscale = d3.scaleLinear()
+                    .domain([d3.min(fTimeVals), d3.max(fTimeVals)])
+                    .range([margin.left, width - margin.right]);
+                chart.selectAll("g.xaxis")
+                  .data([0])
+                  .join("g").attr("class", "xaxis")
+                  .attr("transform", "translate(0, " + (height - margin.bottom) + ")")
+                  .call(d3.axisBottom(xscale).ticks(width / 80).tickSizeOuter(0));
+                chart.selectAll("text.xunits")
+                  .data([0])
+                  .join("text").attr("class", "xunits")
+                  .attr("x", (width - margin.left - margin.right)/2 + margin.left)
+                  .attr("y", height - 14)
+                  .attr("text-anchor", "middle")
+                  .style("font-size", "16px")
+                  .text(div.attr("xaxisname"));
+                var yscale = d3.scaleLinear()
+                    .domain([vmin, vmax])
+                    .range([margin.top, height - margin.bottom]);
+                var yscale_inv = d3.scaleLinear()
+                    .domain([vmin, vmax])
+                    .range([height - margin.bottom, margin.top]);
+                chart.selectAll("g.yaxis")
+                  .data([0])
+                  .join("g").attr("class", "yaxis")
+                  .attr("transform", "translate(" + margin.left + ", 0)")
+                  .call(d3.axisLeft(yscale_inv));
+                chart.selectAll("text.yunits")
+                  .data([0])
+                  .join("text").attr("class", "yunits")
+                  .attr("transform", "rotate(-90)")
+                  .attr("y", 16)
+                  .attr("x", -(height - margin.top - margin.bottom)/2 - margin.top)
+                  .attr("text-anchor", "middle")
+                  .style("font-size", "16px")
+                  .text(div.attr("yaxisname"));
+                for (r in o.runs) {
+                    var color = "red";
+                    if (r == 0) { color = "blue"; }
+                    chart.selectAll("path.data" + r)
+                      .data([o.runs[r].vals])
+                      .join("path").attr("class", "data" + r).attr("d", (d, i) => 
+                        d3.line()
+                          .x((d, i) => xscale(o.runs[r].times[i]))
+                          .y((d) => height - margin.bottom - yscale(d) + margin.top)(d))
+                      .attr("stroke", color)
+                      .attr("fill", "none");
+                }
+            });
+}
+function resetAllSliders() {
+d3.selectAll("input.io-slider-slide").nodes().forEach(function(i){
+i.value = i.getAttribute("value");
+d3.selectAll("div.io-slider-box[name=\"" + i.name + "\"]").text(i.valueAsNumber);
+});
+}
+
+function updateAllSliders() {
+d3.selectAll("input.io-slider-slide").nodes().forEach(function(i){
+i.value = GetConstant(i.name);
+d3.selectAll("div.io-slider-box[name=\"" + i.name + "\"]").text(i.valueAsNumber);
+});
+}
+
+function runModel(run) {
+if (  VensimLoadedFlag == 0)
+{
+	return;
+}
+
+InitializeModel();
+// set all slider constants
+d3.selectAll("input.io-slider-slide").each(function() {
+	//console.log("Setting " + this.name + " to " + this.valueAsNumber);
+	SetConstant(this.name, this.valueAsNumber);
+});
+RunSim();
+UpdateCharts(run);
+}
+
+resetAllSliders();
+
+d3.select("button.resetAll").nodes()[0].onclick = function() {
+resetAllSliders();
+runModel(1);
+}
+
+d3.selectAll("input.io-slider-slide").nodes().forEach(function(i){
+i.oninput = function() {
+// update the number shown for all sliders of this var
+d3.selectAll("div.io-slider-box[name=\"" + i.name + "\"]").text(i.valueAsNumber);
+d3.selectAll("input.io-slider-slide[name=\"" + i.name + "\"]").each(function() { this.value = i.valueAsNumber; })
+runModel(1);
+};
+});
+
+</script>
+
+</body></html>

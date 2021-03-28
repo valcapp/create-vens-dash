@@ -1,0 +1,49 @@
+* { 
+    box-sizing: border-box;
+    }
+    div.sketch {
+    position: relative; 
+    }
+    .io-slider-box {
+    background-color: white; border: 1px solid gray; font-size: 12px;
+    text-align: center; vertical-align: middle; line-height: 14px;
+    }
+    .io-slider-slide {
+    padding: 0; margin: 0; -webkit-appearance: none; background: transparent;
+    }
+    .io-slider-slide::-ms-track {
+    background: transparent; border-color: transparent; color: transparent;
+    }
+    .io-slider-slide::-webkit-slider-thumb {
+    -webkit-appearance: none; width: 15px; height: 15px;
+    border-radius: 20%; background: blue; cursor: pointer;
+    }
+    .io-slider-slide::-moz-range-thumb {
+    height: 15px; width: 15px;
+    border-radius: 20%; background: blue; cursor: pointer;
+    }
+    .io-slider-slide::-ms-thumb {
+    height: 15px; width: 15px;
+    border-radius: 20%; background: blue; cursor: pointer;
+    }
+    div.io-chart {
+    background: white;
+    border: 1px solid gray;
+    }
+    div.io-chart > .svg {
+    width: 100%;
+    height: 100%;
+    }
+    div.topBar * {
+    display: inline-block;
+    }
+    /* h1, h3 {
+    margin: 0 9px;
+    } */
+    /* button.resetAll {
+    padding: 12px 24px;
+    text-align: center;
+    font-size: 16px;
+    margin: 12px;
+    } */
+    

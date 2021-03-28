@@ -1,0 +1,31 @@
+Writing .emscripten configuration file to user home directory /Users/a9858944/
+Backing up old Emscripten configuration file in /Users/a9858944/.emscripten.old
+The Emscripten configuration file /Users/a9858944/.emscripten has been rewritten with the following contents:
+
+NODE_JS = '/Users/a9858944/emsdk/node/12.9.1_64bit/bin/node'
+LLVM_ROOT = '/Users/a9858944/emsdk/upstream/bin'
+BINARYEN_ROOT = '/Users/a9858944/emsdk/upstream'
+EMSCRIPTEN_ROOT = '/Users/a9858944/emsdk/upstream/emscripten'
+TEMP_DIR = '/var/folders/1q/bpdx_bc93z33jkwmgzjk78_m0000gn/T'
+COMPILER_ENGINE = NODE_JS
+JS_ENGINES = [NODE_JS]
+
+To conveniently access the selected set of tools from the command line, consider adding the following directories to PATH, or call 'source ../../../../emsdk/emsdk_env.sh' to do this for you.
+
+   /Users/a9858944/emsdk:/Users/a9858944/emsdk/node/12.9.1_64bit/bin:/Users/a9858944/emsdk/upstream/emscripten
+
+Set the following tools as active:
+   node-12.9.1-64bit
+   releases-upstream-574ad04affb82cc36a32dd89b2a87bea4fb30eba-64bit
+
+Adding directories to PATH:
+PATH += /Users/a9858944/emsdk
+PATH += /Users/a9858944/emsdk/upstream/emscripten
+PATH += /Users/a9858944/emsdk/node/12.9.1_64bit/bin
+
+Setting environment variables:
+EMSDK = /Users/a9858944/emsdk
+EM_CONFIG = /Users/a9858944/.emscripten
+EMSDK_NODE = /Users/a9858944/emsdk/node/12.9.1_64bit/bin/node
+
+Compilation finished!

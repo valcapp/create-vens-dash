@@ -1,0 +1,25 @@
+{
+  "name": "create-vens-dash",
+  "version": "1.0.0",
+  "description": "Creates a Vensim Dashboard App to run a System Dynamics model on the browser.",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [
+    "Create",
+    "Vensim",
+    "Dashboard",
+    "System",
+    "Dynamics"
+  ],
+  "author": "Valerio Cappuccio",
+  "license": "ISC",
+  "bin": "./index.js",
+  "dependencies": {
+    "fs-extra": "^9.1.0"
+  },
+  "devDependencies": {
+    "jest": "^26.6.3"
+  }
+}

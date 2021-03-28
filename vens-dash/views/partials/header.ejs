@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>vens-dash</title>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon/favicon-16x16.png">
+
+    <!-- Bootstrap, Popper.js, and jQuery -->
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script> -->
+
+    <!-- Bootstrap, Popper.js, and jQuery Internal -->
+    <link type="text/css" rel="stylesheet" href="/css/lib/bootstrap.min.css">
+    <script type="text/javascript" src="/js/lib/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/lib/popper.min.js"></script>
+    <script type="text/javascript" src="/js/lib/bootstrap.min.js"></script>
+    <!--  promisify jquery ready -->
+    <script>
+        // a utility func to use jquery ready with async-await syntax
+        const $ready = () => new Promise(
+            resolve => {
+                $(() => resolve());
+            }
+        );
+    </script>
+
+    <!-- to run sd model via wasm -->
+    <script type="text/javascript" src="/js/vensim/wasm-arrays.min.js"></script>
+    <script type="text/javascript" src="/js/vensim/vensim_wasm.js"></script>
+    
+    <script type="text/javascript" src="/mdl/mdl.js"></script>
+    <script type="text/javascript" src="/js/vensim/sim.js"></script>
+
+    <!-- d3 visualization -->
+    <script type="text/javascript" src="/js/lib/d3.min.js"></script>
+    <script type="text/javascript" src="/js/lib/d3-legend.js"></script>
+
+    <!-- Custom CSS -->
+    <link type="text/css" rel="stylesheet" href="/css/style.css">
+    <link type="text/css" rel="stylesheet" href="/css/toggle.css">
+
+    <!-- UI DATA CLASSES -->
+    <script type="text/javascript" src="/js/vensim/readstr.js"></script>
+    <script type="text/javascript" src="/js/utils/uifetch.js"></script>
+    <script type="text/javascript" src="/js/utils/speaker.js"></script>
+
+    <!-- EDITMODE -->
+    <script>
+        let editMode = false;
+        const editModeClass = () => editMode ?
+            "editMode" :
+            "editMode editModeHidden"
+        let toggleEditMode = () => {}
+    </script>
+    <% if (!viewMode) { %>
+        <script>
+            toggleEditMode = () => {
+                $(".editMode").toggleClass("editModeHidden");
+                editMode = !editMode;
+            }
+        </script>
+    <% } %>
+
+
+    <!--  to account for dark background -->
+    <script type="text/javascript" src="js/lib/tinycolor.js"></script>
+    <script>
+        const bkGround = (() => {
+            const ground = {
+                isDark: false
+            };
+
+            const checkIfDark = () => {
+                const backColor = window
+                    .getComputedStyle(document.body, null)
+                    .backgroundColor;
+                return tinycolor(backColor).isDark()
+            }
+            window.addEventListener('load', () => {
+                ground.isDark = checkIfDark();
+                if (ground.isDark) {
+                    const darkIcons = $('img.drk-icon')
+                    const prevFilter = darkIcons.css('filter');
+                    darkIcons.css('filter', 'invert(.8)');
+                }
+            })
+            return ground
+        })();
+    </script>

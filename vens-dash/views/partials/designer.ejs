@@ -1,0 +1,25 @@
+<div class="designerMode designerCtrl" style="margin: 35px 7%">
+    <button type="button" class="btn btn-info btn-lg btn-block editMode">
+        Edit Interface
+    </button>
+    <div class="row editMode editModeHidden">
+        <div class="col">        
+            <button type="button"
+                class="btn btn-outline-secondary btn-lg btn-block"
+                >Back
+            </button>
+        </div>
+        <div class="col">
+                <button type="button"
+                class="btn btn-success btn-lg btn-block saveUI"
+                >Save Interface
+            </button>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    $('.designerCtrl button,.designerCtrl a')
+    .on('click', toggleEditMode);
+</script>

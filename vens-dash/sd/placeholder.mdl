@@ -1,0 +1,453 @@
+{UTF-8}
+many subs var[abc,is,xs]=
+	0.5
+	~	u [0,1,0.05]
+	~	This is to test with constants with many subscripts.
+	|
+
+"test ="=
+	2
+	~	u [0,10,1]
+	~	This is a test to see if wasm compilation is still successful with variables \
+		containing equal signs in their names.
+		Apparently yes.
+		Problems occur when double quotes " appear in the name.
+	|
+
+"test ["[abc]=
+	2
+	~	u [0,10,1]
+	~	This is a test to see if wasm compilation is still successful with \
+		variables containing square brackets in their names. Apparently yes.
+	|
+
+test without unit=
+	0.5
+	~	 [0,1,0.1]
+	~		|
+
+test without max=
+	1
+	~	Dmnl [0,?,1]
+	~		|
+
+test without min=
+	1
+	~	Dmnl [?,5,0.1]
+	~		|
+
+xyz:
+	x,y,z
+	~	
+	~		|
+
+adjusted feedback[xs]=
+	lookup factor(feedback var[xs]/u reference)
+	~	Dmnl
+	~		|
+
+aggregate stocks[xs]=
+	SUM(stock abc[abc!,xs])/ELMCOUNT(abc)
+	~	u
+	~	These are the stocks aggregated by over abc subscript.
+	|
+
+feedback var[xs]=
+	SUM(stock xyz[xs,is!,xyz!])/
+	ELMCOUNT(is)/ELMCOUNT(xyz)
+	~	u
+	~	This is a variable to close the feedback loop, it is an average between \
+		the i annd xyz range
+	|
+
+g factor=
+	50
+	~	Dmnl [0,50,0.0001]
+	~	a factor to regulate the growth of stock xyz
+	|
+
+initial stock xyz[x,xs]=
+	initial stock x[xs] ~~|
+initial stock xyz[y,xs]=
+	initial stock y[xs] ~~|
+initial stock xyz[z,xs]=
+	initial stock z[xs]
+	~	u [10,500,10]
+	~		|
+
+growth rate abc[a]=
+	growth rate a ~~|
+growth rate abc[b]=
+	growth rate b ~~|
+growth rate abc[c]=
+	growth rate c
+	~	1/Month [-0.05,0.05,0.001]
+	~	it is the fractional rate by which the stock grows in time.
+	|
+
+initial stock z[xs]=
+	80
+	~	u [0,500,10]
+	~	A comment for var z: bla bla
+	|
+
+growth rate c=
+	0.025
+	~	1/Month [-0.05,0.05,0.001]
+	~	The rate of gorwth for c
+	|
+
+growth rate x=
+	0.01
+	~	1/Month [-0.05,0.05,0.001]
+	~	The rate of growth for x
+	|
+
+growth rate xyz[x]=
+	growth rate x ~~|
+growth rate xyz[y]=
+	growth rate y ~~|
+growth rate xyz[z]=
+	growth rate z
+	~	1/Month [-0.05,0.05,0.001]
+	~	it is the fractional rate by which the stock grows in time.
+	|
+
+growth rate y=
+	0.015
+	~	1/Month [-0.05,0.05,0.001]
+	~	The rate of growth for y
+	|
+
+growth rate z=
+	0
+	~	1/Month [-0.05,0.05,0.001]
+	~	The rate of gorwth for z
+	|
+
+i factor[is]=
+	1,2,3,4,5
+	~	 [0,10,0.2]
+	~		|
+
+inflow abc[abc,xs]=
+	feedback var[xs] * growth rate abc[abc] * x factor[xs] * adjusted feedback[xs]
+	~	u/Month
+	~	This is the rate the stock changes in time.
+	|
+
+inflow xyz[xs,is,xyz]=
+	(ref stock - aggregate stocks[xs]*i factor[is])
+	* growth rate xyz[xyz]*g factor
+	~	u/Month
+	~	This is the rate the stock changes in time.
+	|
+
+is:
+	i1,i2,i3,i4,i5
+	~	
+	~		|
+
+initial stock abc[a,xs]=
+	initial stock a ~~|
+initial stock abc[b,xs]=
+	initial stock b ~~|
+initial stock abc[c,xs]=
+	initial stock c
+	~	u [10,500,10]
+	~		|
+
+ref stock=
+	50
+	~	u [-500,500,50]
+	~	This is a reference stock that controls the oscillations.
+	|
+
+initial stock c=
+	50
+	~	u [-200,500,10]
+	~	A comment for var c: bla bla
+	|
+
+initial stock x[xs]=
+	100
+	~	u [-100,300,10]
+	~	A comment for var x: bla bla
+	|
+
+u reference=
+	100
+	~	u [50,500,10]
+	~	Refence variable to regulate the feedback var
+	|
+
+initial stock y[xs]=
+	120
+	~	u [-300,200,10]
+	~	A comment for var y: bla bla
+	|
+
+xs:
+	x1,x2,x3,x4,x5
+	~	
+	~		|
+
+stock xyz[xs,is,xyz]= INTEG (
+	inflow xyz[xs,is,xyz],
+		initial stock xyz[xyz,xs])
+	~	u
+	~	This represent the quantity in the stock for the various categories xs, \
+		is, xyz
+	|
+
+lookup factor(
+	[(-1,0)-(10,1)],(-0.224033,0.327),(0.386965,0.3318),(1.75153,0.3886),(3.95112,0.564)\
+		,(6.43585,0.8531),(8.28921,0.9242),(9.73523,0.9242))
+	~	Dmnl [0,1]
+	~	This is a variable to test the lookups.
+	|
+
+x factor[xs]=
+	RANDOM UNIFORM( 0 , 1 , 2323)
+	~	Dmnl
+	~	This is the factor to test xs subscripts.
+	|
+
+stock abc[abc,xs]= INTEG (
+	inflow abc[abc,xs],
+		initial stock abc[abc,xs])
+	~	u
+	~	This represent the quantity in the stock for the categories abc.
+	|
+
+growth rate a=
+	0.01
+	~	1/Month [-0.05,0.05,0.001]
+	~	The rate of growth for a.
+	|
+
+growth rate b=
+	0.015
+	~	1/Month [-0.05,0.05,0.001]
+	~	The rate of growth for b
+	|
+
+initial stock a=
+	100
+	~	u [-100,200,10]
+	~	A comment for var a: bla bla
+	|
+
+initial stock b=
+	200
+	~	u [0,400,10]
+	~	A comment for var b: bla bla
+	|
+
+abc:
+	a,b,c
+	~	Dmnl
+	~	this is the abc subscript.
+		Interesting no?
+		bla bla
+	|
+
+********************************************************
+	.Control
+********************************************************~
+		Simulation Control Parameters
+	|
+
+FINAL TIME  = 100
+	~	Month
+	~	The final time for the simulation.
+	|
+
+INITIAL TIME  = 0
+	~	Month
+	~	The initial time for the simulation.
+	|
+
+SAVEPER  = 
+        TIME STEP
+	~	Month [0,?]
+	~	The frequency with which output is stored.
+	|
+
+TIME STEP  = 1
+	~	Month [0,?]
+	~	The time step for the simulation.
+	|
+
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*View 1
+$192-192-192,0,Times New Roman|12||0-0-0|0-0-0|0-0-255|-1--1--1|255-255-255|72,72,133,3
+10,1,growth rate abc,171,262,37,14,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,2,stock abc,431,195,40,20,3,3,0,0,0,0,0,0,0,0,0,0,0,0
+12,3,48,220,198,26,15,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,4,6,2,4,0,0,22,0,0,0,-1--1--1,,1|(353,198)|
+1,5,6,3,100,0,0,22,0,0,0,-1--1--1,,1|(275,198)|
+11,6,48,310,198,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,7,inflow abc,310,220,27,14,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,8,1,7,0,0,0,0,0,128,0,-1--1--1,,1|(238,241)|
+10,9,initial stock abc,442,279,37,14,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,10,9,2,0,0,0,0,0,64,1,-1--1--1,,1|(438,246)|
+12,11,0,548,170,3,2,3,188,1,0,2,0,0,0,0,0,0,0,0,0
+stock abc[a],Graph
+12,12,0,549,201,2,1,3,188,1,0,2,0,0,0,0,0,0,0,0,0
+stock abc[b],Graph
+10,13,growth rate a,94,234,32,14,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,14,initial stock a,376,310,33,14,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,15,growth rate b,106,308,32,14,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,16,15,1,0,0,0,0,0,128,0,-1--1--1,,1|(132,288)|
+1,17,13,1,0,0,0,0,0,128,0,-1--1--1,,1|(123,244)|
+10,18,initial stock b,507,318,33,14,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,19,14,9,0,0,0,0,0,128,0,-1--1--1,,1|(402,297)|
+1,20,18,9,0,0,0,0,0,128,0,-1--1--1,,1|(480,302)|
+10,21,growth rate c,181,340,32,14,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,22,21,1,0,0,0,0,0,128,0,-1--1--1,,1|(177,307)|
+10,23,initial stock c,552,270,33,14,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,24,23,9,0,0,0,0,0,128,0,-1--1--1,,1|(505,272)|
+10,25,x factor,226,119,21,14,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,26,25,7,0,0,0,0,0,128,0,-1--1--1,,1|(263,164)|
+10,27,aggregate stocks,662,253,39,14,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,28,2,27,1,0,0,0,0,128,0,-1--1--1,,1|(555,181)|
+10,29,growth rate xyz,618,517,37,14,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,30,stock xyz,802,439,40,20,3,3,0,0,0,0,0,0,0,0,0,0,0,0
+12,31,48,591,442,26,15,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,32,34,30,4,0,0,22,0,0,0,-1--1--1,,1|(724,442)|
+1,33,34,31,100,0,0,22,0,0,0,-1--1--1,,1|(646,442)|
+11,34,48,681,442,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,35,inflow xyz,681,464,27,14,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,36,29,35,0,0,0,0,0,128,0,-1--1--1,,1|(643,494)|
+10,37,initial stock xyz,906,513,38,14,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,38,37,30,0,0,0,0,0,64,1,-1--1--1,,1|(864,483)|
+10,39,initial stock x,840,544,33,14,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,40,growth rate y,553,563,32,14,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,41,40,29,0,0,0,0,0,128,0,-1--1--1,,1|(579,543)|
+10,42,initial stock y,971,552,33,14,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,43,39,37,0,0,0,0,0,128,0,-1--1--1,,1|(866,531)|
+1,44,42,37,0,0,0,0,0,128,0,-1--1--1,,1|(944,536)|
+10,45,growth rate z,636,595,32,14,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,46,45,29,0,0,0,0,0,128,0,-1--1--1,,1|(628,562)|
+10,47,initial stock z,1016,504,33,14,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,48,47,37,0,0,0,0,0,128,0,-1--1--1,,1|(970,506)|
+10,49,i factor,588,368,20,14,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,50,49,35,0,0,0,0,0,64,0,-1--1--1,,1|(629,410)|
+1,51,27,35,1,0,0,0,0,128,0,-1--1--1,,1|(690,397)|
+10,52,growth rate x,497,487,32,14,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,53,52,29,0,0,0,0,0,128,0,-1--1--1,,1|(548,498)|
+10,54,lookup factor,440,379,33,14,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,55,u reference,428,424,28,14,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,56,feedback var,299,487,31,14,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,57,30,56,1,0,0,0,0,128,0,-1--1--1,,1|(499,633)|
+10,58,adjusted feedback,319,387,42,14,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,59,54,58,0,0,0,0,0,128,0,-1--1--1,,1|(390,382)|
+1,60,56,58,0,0,0,0,0,128,0,-1--1--1,,1|(307,443)|
+1,61,58,7,1,0,0,0,0,128,0,-1--1--1,,1|(301,308)|
+1,62,55,58,0,0,0,0,0,128,0,-1--1--1,,1|(386,410)|
+10,63,ref stock,554,392,23,14,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,64,63,35,0,0,0,0,0,128,0,-1--1--1,,1|(610,424)|
+10,65,g factor,621,331,21,14,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,66,65,35,0,0,0,0,0,128,0,-1--1--1,,1|(647,391)|
+1,67,56,7,1,0,0,0,0,128,0,-1--1--1,,1|(236,370)|
+12,68,0,-281,350,65,45,3,188,0,0,2,0,0,0,0,0,0,0,0,0
+stock abc[a,x3],Graph
+12,69,0,-281,441,65,45,3,188,0,0,2,0,0,0,0,0,0,0,0,0
+stock abc[a,x4],Graph
+12,70,0,-281,532,65,45,3,188,0,0,2,0,0,0,0,0,0,0,0,0
+stock abc[a,x1],Graph
+12,71,0,-281,532,65,45,3,188,0,0,2,0,0,0,0,0,0,0,0,0
+stock abc[a,x5],Graph
+12,72,0,-281,167,65,45,3,188,0,0,2,0,0,0,0,0,0,0,0,0
+stock abc[a,x1],Graph
+12,73,0,-281,258,65,45,3,188,0,0,2,0,0,0,0,0,0,0,0,0
+stock abc[a,x2],Graph
+12,74,0,-150,350,65,45,3,188,0,0,2,0,0,0,0,0,0,0,0,0
+stock abc[b,x3],Graph
+12,75,0,-150,441,65,45,3,188,0,0,2,0,0,0,0,0,0,0,0,0
+stock abc[b,x4],Graph
+12,76,0,-150,532,65,45,3,188,0,0,2,0,0,0,0,0,0,0,0,0
+stock abc[a,x1],Graph
+12,77,0,-150,532,65,45,3,188,0,0,2,0,0,0,0,0,0,0,0,0
+stock abc[b,x5],Graph
+12,78,0,-150,167,65,45,3,188,0,0,2,0,0,0,0,0,0,0,0,0
+stock abc[b,x1],Graph
+12,79,0,-150,258,65,45,3,188,0,0,2,0,0,0,0,0,0,0,0,0
+stock abc[b,x2],Graph
+12,80,0,-19,350,65,45,3,188,0,0,2,0,0,0,0,0,0,0,0,0
+stock abc[c,x3],Graph
+12,81,0,-19,441,65,45,3,188,0,0,2,0,0,0,0,0,0,0,0,0
+stock abc[c,x4],Graph
+12,82,0,-19,532,65,45,3,188,0,0,2,0,0,0,0,0,0,0,0,0
+stock abc[a,x1],Graph
+12,83,0,-19,532,65,45,3,188,0,0,2,0,0,0,0,0,0,0,0,0
+stock abc[c,x5],Graph
+12,84,0,-19,167,65,45,3,188,0,0,2,0,0,0,0,0,0,0,0,0
+stock abc[c,x1],Graph
+12,85,0,-19,258,65,45,3,188,0,0,2,0,0,0,0,0,0,0,0,0
+stock abc[c,x2],Graph
+10,86,test without min,769,224,38,14,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,87,test without max,760,242,39,14,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,88,test without unit,752,271,38,14,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,89,"test [",634,93,16,14,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,90,"test =",689,147,17,14,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,91,many subs var,812,354,35,14,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+///---\\\
+:L<%^E!@
+1:Current.vdfx
+1:/Users/a9858944/Documents/iVensim/pubWebexprm/vensimExperiment 2/stock500.vdfx
+1:/Users/a9858944/Documents/iVensim/pubWebexprm/vensimExperiment 2/Current.vdfx
+9:Current
+22:$,Dollar,Dollars,$s
+22:Hour,Hours
+22:Month,Months
+22:Person,People,Persons
+22:Unit,Units
+22:Week,Weeks
+22:Year,Years
+22:Day,Days
+15:0,0,0,0,0,0
+19:133,0
+27:0,
+34:0,
+42:1
+72:0
+73:0
+4:Time
+5:many subs var[abc,is,xs]
+35:Date
+36:YYYY-MM-DD
+37:2000
+38:1
+39:1
+40:2
+41:0
+76:0
+77:0
+78:0
+79:0
+80:0
+81:0
+24:0
+25:100
+26:100
+75:
+43:
+6:a
+6:b
+6:c
+6:i1
+6:i2
+6:i3
+6:i4
+6:i5
+6:x
+6:x1
+6:x2
+6:x3
+6:x4
+6:x5
+6:y
+6:z

@@ -1,0 +1,20 @@
+.addTabButton{
+    width:0.7em;
+    filter: opacity(0.5);
+    transition: all 0.3s;
+}
+
+li:hover .addTabButton
+{
+    filter: invert(0.2) sepia(0.3) saturate(10000%) hue-rotate(230deg) opacity(0.7);
+    transform: scale(1.2);
+    transition: filter none, transform 0.3s;
+}
+
+.nav-item input{
+    width: 104px;
+    border: 1px solid #ced4da;
+}
+.tab-pane h4{
+    margin-top: 16px;
+}

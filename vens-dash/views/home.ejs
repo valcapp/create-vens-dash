@@ -1,0 +1,55 @@
+<%- include("partials/header") %>
+<%- include("partials/navbar") %>
+
+<div class="jumbotron">
+    <!-- TITLE -->
+    <h1 class="display-2 cmz-title">
+        <label>Title</label>
+        <input class="form-control" type="text">
+        <output></output>
+    </h1>
+
+    <!-- SUBTITLE1 -->
+    <p class="display-4 lead cmz-subtitle1">
+        <label>Subtitle 1</label>
+        <textarea class="form-control"></textarea>
+        <output></output>
+    </p>
+    
+    <!-- SUBTITLE2 -->
+    <p class="lead cmz-subtitle2">
+        <label>Subtitle 2</label>
+        <textarea class="form-control"></textarea>
+        <output></output>
+    </p>
+    
+    <!-- TEXT -->
+    <div class="cmz-intro">
+        <label>Introduction</label>
+        <textarea class="form-control"></textarea>
+        <output></output>
+    </div>
+
+    <hr class="my-4">
+    <p>Run the model to get started.</p>
+    <p class="lead">
+        <a class="btn btn-primary btn-lg" href="/run" role="button">Run Model</a>
+    </p>
+
+</div>
+
+<!-- <script type="text/javascript" src="/js/text/customize.js"></script> -->
+<%- include("partials/designer") %>
+
+<script>
+    $('.saveUI').on('click',
+        async () => {
+            const spk = await speaker;
+            saveAndAlert(
+                spk.save
+            ,'text');
+        }
+    )
+</script>
+
+<%- include("partials/footer") %> 

@@ -1,0 +1,47 @@
+{
+    "name": "vens-dash",
+    "version": "1.0.0",
+    "description": "An app that generates and runs an interface on top of a system-dynamics model.",
+    "main": "app.js",
+    "scripts": {
+        "build": "node build",
+        "reset": "node build fromScratch",
+        "start": "node app openAtStart",
+        "build-start": "node app mdlChanged openAtStart",
+        "reset-start": "node app fromScratch mdlChanged openAtStart",
+        "view": "node app viewMode",
+        "dev": "nodemon -L app.js",
+        "dev-view": "nodemon -L app.js viewMode",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "nodemonConfig": {
+        "ignore": [
+            "public/config/*"
+        ]
+    },
+    "keywords": [
+        "system-dynamics",
+        "dashboard",
+        "custom-view",
+        "interface",
+        "sliders-charts",
+        "express",
+        "js"
+    ],
+    "author": "valerio cappuccio",
+    "license": "ISC",
+    "dependencies": {
+        "dotenv": "^8.2.0",
+        "ejs": "^3.1.2",
+        "express": "^4.17.1",
+        "image-size": "^0.8.3",
+        "jquery": "^3.5.1",
+        "jsdom": "^16.2.2",
+        "multer": "^1.4.2",
+        "open": "^7.0.4"
+    },
+    "devDependencies": {
+        "nodemon": "^2.0.7",
+        "cors": "^2.8.5"
+    }
+}

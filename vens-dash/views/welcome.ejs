@@ -1,0 +1,21 @@
+<%- include("partials/header.ejs") %>
+<%- include("partials/navbar.ejs") %>
+
+<div class="container text-center">
+    <br/><br/>
+    <h1>Welcome</h1>
+    <br/>
+    <h5>Reading model variables...</h5>
+</div>
+
+<script>
+    (async () => {
+        await uiCache;
+        console.log((await uiCache).mdl);
+        // this page forces it to overwrite the cache
+        await saveResources(uiCache);
+        window.location = '/';
+    })();
+</script>
+
+<%- include("partials/footer") %> 

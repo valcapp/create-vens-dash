@@ -1,0 +1,207 @@
+<%- include("partials/header.ejs") %>
+
+    <link href="/css/dashb.css" rel="stylesheet" type="text/css">
+    <link href="/css/sideBar.css" rel="stylesheet" type="text/css">
+    <link href="/css/tabs.css" rel="stylesheet" type="text/css">
+    <link href="/css/iovar-cards.css" rel="stylesheet" type="text/css">
+
+    <%- include("partials/navbar.ejs") %>
+
+        <!-- MODAL -->
+        <div class="modal fade" id="dashbModal" tabindex="-1" role="dialog" aria-hidden="true">
+            <!-- CREATE RUN -->
+            <div class="modal-dialog runnerCreate">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Create Run</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <p>Please, give a name and a description to the new run. Then use the dashboard to modify the run inputs and if you want the run to persist click on the 'save button' from the sidebar.</p>
+                            <label class="col-form-label">Name</label>
+                            <input type="text" class="form-control newRunName" placeholder="Run Name" value="Current">
+                            <br>
+                            <label class="form-label">Description</label>
+                            <textarea class="form-control newRunDescription" rows="3"></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary createRunButton" data-dismiss="modal">Create</button>
+                    </div>
+                </div>
+            </div>
+            <!-- SWITCH RUN -->
+            <div class="modal-dialog runnerSwitch">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Switch Run</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Please, select the run you want to switch to. This will be the currently simulated run when moving the sliders.</p>
+                        <select class="custom-select runSelect" aria-label="Runs">
+                <!-- <option value="1">One</option> -->
+            </select>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <!-- <button type="button" class="btn btn-danger" data-dismiss="modal" id="deleteButton">Delete</button> -->
+                        <button type="button" class="btn btn-primary switchRunButton" data-dismiss="modal">Confirm</button>
+                    </div>
+                </div>
+            </div>
+            <!-- MANAGE RUNS -->
+            <div class="modal-dialog runnerManage">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Manage Runs</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Please, select whether to rename, hide, delete or save the following runs.</p>
+                        <div class="runsManager">
+                            <!-- <div class="runToManage">
+                    <div class="custom-control custom-switch">
+                        <input type="checkbox" class="custom-control-input runToggle" id="run-${runIdx}" name="${run.name}">
+                        <label class="custom-control-label" for="run-${runIdx}">${run.name}</label>
+                        <div class="runDelete trasherButton">
+                            <img  src="/img/icons/trash.svg" alt="del">
+                        </div>
+                    </div>
+                </div> -->
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <!-- <button type="button" class="btn btn-danger" data-dismiss="modal" id="deleteButton">Delete</button> -->
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Confirm</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="wrapper" id="mainContainer">
+
+            <!--  SIDE BAR  -->
+            <nav id="sideBar" class="compressed nav flex-column navbar-light bg-light">
+
+                <div id="sidebarCollapse" class="sidebar-header btn btn-primary" type="button">
+                    <div class="hint"><img src="/img/icons/menu.svg" alt="" class="drk-icon"></div>
+                    <div class="compress">
+                        <div>
+                            <h4 style="margin:0px;">Menu</h4>
+                        </div>
+                        <div><img src="/img/icons/chevron-left.svg" alt="" class="drk-icon"></div>
+                    </div>
+                </div>
+
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link resetAll" type="button">
+                            <img src="/img/icons/reset.svg" alt="" class="drk-icon">
+                            <span class="compress">Reset sliders</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" type="button" data-toggle="collapse" data-target=".diagram-img" aria-expanded="false" aria-controls="diagram">
+                            <img src="/img/icons/eye.svg" alt="" class="drk-icon">
+                            <span class="compress">Show diagram</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item dropright">
+                        <a type="button" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <img src="/img/icons/play.svg" alt="" class="drk-icon">
+                            <span class="compress">Runs</span>
+                        </a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item showRunnerCreate" type="button" data-toggle="modal" data-target="#dashbModal">
+                        Create Run</a>
+                            <a class="dropdown-item showRunnerSwitch" type="button" data-toggle="modal" data-target="#dashbModal">
+                        Switch Run</a>
+                            <a class="dropdown-item showRunnerManage" type="button" data-toggle="modal" data-target="#dashbModal">
+                        Manage Runs</a>
+                            <a class="dropdown-item saveRunsButton designerCtrl">
+                        Save Runs</a>
+                        </div>
+                    </li>
+
+                    <li class="nav-item designerCtrl">
+                        <a type="button" class="nav-link customizeButton">
+                            <img src="/img/icons/edit.svg" alt="" class="drk-icon">
+                            <span class="compress">Customize View</span>
+                        </a>
+                    </li>
+
+                </ul>
+            </nav>
+
+            <!-- CONTENT -->
+            <div id="contentDiv">
+
+                <br>
+                <div class="runTalk jumbotron">
+                    <h1>Run the model</h1>
+                    <p> Modify model inputs to see the change in the results.</p>
+
+                </div>
+
+                <!-- EDIT TAB CONTROL-EXPLAIN -->
+                <div class="container editMode editModeHidden designerCtrl">
+                    <h4> Change sliders and charts</h4>
+                    <p>Customize the dashboard view defining tabs, sliders and charts.</p>
+                    <p>When you are happy with the results, remember to save!</p>
+                </div>
+                <%- include("partials/designer") %>
+
+
+                    <!-- TABS BAR -->
+                    <ul class="nav nav-tabs tabsBar" role="tablist">
+
+                        <li class="nav-item lastTab editMode editModeHidden">
+                            <a class="nav-link" data-toggle="tab" role="tab" href="#">
+                    Add <img src="/img/icons/add.svg" alt="" class="addTabButton mx-auto">
+                </a>
+                        </li>
+                    </ul>
+
+
+                    <div class="io-div">
+                        <!-- TABS CONTENT -->
+                        <div class="tab-content" id="tab-content">
+                        </div>
+                    </div>
+            </div>
+
+        </div>
+        <!-- dynamic sidebar -->
+        <script>
+            $(() => {
+                $('#sidebarCollapse').on('click', () => {
+                    $('#sideBar').toggleClass('compressed');
+                    $('#contentDiv').toggleClass('compressed');
+                });
+            });
+        </script>
+
+        <script type="text/javascript" src="/js/utils/tabs.js"></script>
+        <script type="text/javascript" src="js/utils/iovar-cards.js"></script>
+        <script type="text/javascript" src="js/utils/diagrams.js"></script>
+
+        <script type="text/javascript" src="/js/utils/sliders.js"></script>
+        <script type="text/javascript" src="/js/utils/charts.js"></script>
+        <script type="text/javascript" src="/js/utils/scenarios.js"></script>
+
+        <script type="text/javascript" src="/js/dashb-panes.js"></script>
+        <script type="text/javascript" src="/js/dashb-load.js"></script>
+
+        <%- include("partials/footer") %>

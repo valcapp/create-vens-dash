@@ -1,0 +1,176 @@
+#mainContainer{
+    margin-top:0px;
+}
+
+/* CONTENT */
+.runTalk{
+    margin-top:0;
+    padding-top:32px;
+    padding-bottom:24px;
+    background-color:transparent;
+}
+.io-div{
+    margin-top:32px;
+    width:100%;
+}
+/* DIAGRAM */
+.diagram-img{
+    margin: 30px 30px;
+    overflow: hidden;
+    border: none;
+    text-align: center;
+}
+.diagram-img img{
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+/* SLIDERS */
+.sliderGroup{
+    /* background-color:rgba(245,245,245,0.6); */
+    margin: 7px auto;
+    padding:10px;
+    border-radius:10px;
+}
+.io-slider-slide{
+    cursor:pointer;
+}
+.unit{
+    font-size: smaller;
+}
+.info{
+    margin-top: 5px;
+    width: 15px;
+    filter: opacity(0.2);
+    transition: 0.3s;
+}
+.info:hover{
+    filter: opacity(0.4);
+    transform: scale(1.5);
+    transition: 0.3s;
+}
+.io-chart .info{
+    margin-top: 5%;
+    margin-left: 5%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+/*  CHARTS */
+.chartsDiv{
+    min-width:80%;
+    /* margin:auto; */
+}
+div.io-chart, div.add-chart {
+    /* background-color: rgba(248, 248, 255,0.6); */
+    border-radius:15px;
+    height: 300px;
+    margin: 15px auto;
+}
+div.io-chart > .svg {
+    width: 100%;
+    height: 100%;
+    /* padding-bottom:85%; */
+}
+
+/* ---> EDIT MODE <-- */
+/* header */
+hr.thicker{
+    border-top: 3px solid lightgrey;
+}
+.saveViewButtonDiv{
+    text-align: center;
+    margin: 36px auto;
+}
+.io-div h4{
+    margin: 32px auto 24px;
+}
+/* add - delete - move */
+.addButton{
+    width:2em;
+}
+div.add-slider label,
+div.add-chart label
+{
+    filter: invert(0.75);
+    transition: 0.3s;
+}
+div.add-slider .addButton,
+div.add-chart .addButton{
+    filter: invert(0.75);
+    transition: filter none, transform 0.3s;
+    transition: 0.3s;
+    transition-property: transform;
+}
+div.add-slider:hover .addButton,
+div.add-chart:hover .addButton
+{
+    filter: invert(0.2) sepia(0.3) saturate(10000%) hue-rotate(230deg) opacity(0.7);
+    transform: scale(1.3);
+    transition: filter none, transform 0.3s;
+}
+div.add-slider:hover .addButton,
+div.add-chart:hover .addButton
+{
+    transform: scale(1.3);
+    transition: 0.3s;
+    transition-property: transform;
+}
+div.add-slider:hover label,
+div.add-chart:hover label
+{
+    filter: invert(0);
+}
+.deleter{
+    cursor: pointer;
+    width: 15px;
+    margin-top: 5%;
+    margin-right: 5%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform: rotate(45deg);
+    filter: invert(0.7) sepia(1) saturate(10000%) hue-rotate(30deg) opacity(0.7);
+}
+.deleter:hover{
+    transform: rotate(45deg) scale(1.5);
+    transition: 0.3s;
+}
+.runToManage{
+    border-radius: 10px;
+    padding: 3px 15px;
+    transition: all .3s ease-in-out;
+}
+.runToManage:hover{
+    box-shadow: 0px 0px 5px rgba(0, 105, 217, .6);
+}
+.trasherButton{
+    height: 20px;
+    width: 20px;
+    display: inline-block;
+    background-color: #dc3545; 
+    vertical-align: middle;
+    border-radius: 7px;
+    text-align: center;
+    cursor: pointer;
+    position: absolute;
+    right: 2px;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: all .3s ease-in-out;
+}
+.trasherButton:hover{
+    background-color: #c82333;
+    transform: scale(1.1) translateY(-50%);
+}
+.trasherButton img{
+    width: 12px;
+    filter: invert(1);
+    vertical-align: middle;
+    position: absolute;
+    right: 4px;
+    top: 50%;
+    transform: translateY(-50%)
+}

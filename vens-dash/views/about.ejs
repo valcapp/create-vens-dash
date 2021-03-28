@@ -1,0 +1,44 @@
+<%- include("partials/header.ejs") %>
+<%- include("partials/navbar.ejs") %>
+
+<div class="jumbotron">
+    <div class="container">
+
+        <h2 class="display-4">About</h2>
+        <br>
+
+        <p class="lead cmz-about-lead">
+            <label>Lead</label>
+            <textarea class="form-control"></textarea>
+            <output></output>
+        </p>
+        
+        <p class="cmz-about-main">
+            <label>Main</label>
+            <textarea class="form-control"></textarea>
+            <output></output>
+        </p>
+
+        <hr class="my-4">
+        <p class="lead">
+            <p> Explore the model scenarios by running the model! </p>
+            <a class="btn btn-primary btn-lg" href="/run" role="button">Run Model</a>
+        </p>
+    </div>
+</div>
+
+<%- include("partials/designer") %>
+
+<script>
+    $('.saveUI').on('click',
+        async () => {
+            const spk = await speaker;
+            saveAndAlert(
+                spk.save
+            ,'text');
+        }
+    )
+</script>
+
+<%- include("partials/footer") %>
+
