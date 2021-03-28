@@ -1,6 +1,6 @@
 # Vensim Dashboard Generator
 
-This app allows to build a decent looking dashboard interface from a Vensim system dynamics model and to run it locally on modern browser (i.e. not IE).
+This app allows to build a dashboard interface from a Vensim system dynamics model and to run it locally on modern browser (i.e. not IE).
 
 ## Purpose
 Load your system-dynamics working folder and and run the app to serve locally a simple web-page o for your model with a dynamically responsive dashboard.
@@ -14,8 +14,7 @@ You would be able to customize by:
 
 ## Requirements
 
-This app requires [Node.js](https://nodejs.org/). Before running this application, the Vensim web folder needs to be published first. The Vensim web publishing feature is available only on  v8.1+. 
-The app also requires node.js to run.
+This app requires [Node.js](https://nodejs.org/). Before running this application, you need to compile the Vensim model into WebAssembly first. [This functionality](#https://www.vensim.com/documentation/publishing-a-model-to-the-inte.html) is available from version 8.1 of Vensim.
 
 ## Usage
 

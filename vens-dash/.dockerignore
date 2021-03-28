@@ -1,12 +1,13 @@
-node_modules
 __pycache__/
 *.pyc
-.vscode
+node_modules
 /debug.log
+.vscode
 /.env
 /idea.md
-/db/
+# /db/
 /db?/
+/sd/
 /sd?/
 *.?mdl
 /build/vensim*
