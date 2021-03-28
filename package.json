@@ -1,6 +1,6 @@
 {
   "name": "create-vens-dash",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Creates a Vensim Dashboard App to run a System Dynamics model on the browser.",
   "main": "index.js",
   "scripts": {
