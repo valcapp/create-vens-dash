@@ -1,0 +1,28 @@
+{
+    "ignored": [
+        "something/node_modules/amodule",
+        "bla/node_modules/hello",
+        "/debug.log",
+        "cached/nested.pyc",
+        "somewhere/.vscode",
+        "/.env",
+        "/idea.md",
+        "/dash-data/andmore",
+        "/dash-data1",
+        "/dash-dataZ",
+        "/sd1/otherStuff",
+        "/sdo/",
+        "/sd-hi/",
+        "/something.0mdl",
+        "/dash-init/vensim.js",
+        "/legacy/bla",
+        "/views/debug.ejs"
+    ],
+    "included": [
+        "anything",
+        "/some/beautiful_node_modules/",
+        "something/else",
+        "You_catch/morefiles/with-honey/than-with/vinegar",
+        "An-Apple_a_day/keeps/Windows-away"
+    ]
+}

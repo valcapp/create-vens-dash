@@ -5,11 +5,12 @@ node_modules
 .vscode
 /.env
 /idea.md
-# /db/
-/db?/
+# /dash-data/
+/dash-data?/
 /sd/
 /sd?/
+/sd-*/
 *.?mdl
-/build/vensim*
+/dash-init/vensim*
 /legacy
 /views/debug.ejs

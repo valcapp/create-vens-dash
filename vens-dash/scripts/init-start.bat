@@ -1,4 +1,4 @@
 @echo off
 cd ..
-npm run build-start
+npm run init-start
 pause

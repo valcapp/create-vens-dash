@@ -5,10 +5,11 @@
 /debug.log
 /.env
 /idea.md
+/dash-data
 /dash-data?
 /sd?/
 /sd-*/
 *.?mdl
 /dash-init/vensim*
-/legacy
+/legacy/
 /views/debug.ejs

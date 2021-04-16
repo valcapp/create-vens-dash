@@ -1,8 +1,12 @@
 const express = require('express');
+const log = require('loglevel').getLogger('api');
+// log.setLevel('DEBUG');
 
 /** generate router exposing APIs to read and write 
  * customizable-ui-configurations from frontend */
-module.exports = ({docs}) => {
+module.exports = (db, readOnly) => {
+    log.debug('readOnly is:',readOnly);
+    const { docs } = db;
     const router = express.Router();
     // router.use(express.urlencoded());
 
@@ -21,8 +25,9 @@ module.exports = ({docs}) => {
     // add PUT routes to router
     resources.forEach( resource => {
         router.put('/api/'+resource,(req, res)=>{
-            if (viewMode){
-                res.status(403).json({message:`Update forbidden of resource  "${resource}"`});
+            log.debug('readOnly is:',readOnly);
+            if (readOnly){
+                res.status(403).json({message:`Update forbidden for resource: "${resource}"`});
             } else {
                 docs[resource].write(req.body);
                 res.status(200).json({message:`Updated server resource: "${resource}"`});

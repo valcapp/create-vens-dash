@@ -55,6 +55,10 @@
     <!-- EDITMODE -->
     <script>
         let editMode = false;
+        let viewMode = true;
+        /** when creating ui elements on the fly
+        * they should be hidden or not depending on current state (of editMode)
+         */
         const editModeClass = () => editMode ?
             "editMode" :
             "editMode editModeHidden"
@@ -62,6 +66,7 @@
     </script>
     <% if (!viewMode) { %>
         <script>
+            viewMode = false;
             toggleEditMode = () => {
                 $(".editMode").toggleClass("editModeHidden");
                 editMode = !editMode;

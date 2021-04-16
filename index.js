@@ -2,7 +2,26 @@
 const fs = require('fs');
 const fse = require('fs-extra');
 const path = require('path');
-const srcPath = path.resolve( __dirname, 'vens-dash' );
+const log = require('loglevel');
+log.setLevel(log.levels.INFO);
+
+const GitFilter = require('./gitfilter');
+const dashIgnorePath = path.resolve(__dirname, '.dashignore');
+const dashFilter = GitFilter(dashIgnorePath);
+
+
+// const vensDashPath = path.resolve( __dirname, 'dash-ignore-test' );
+const vensDashPath = path.resolve( __dirname, 'vens-dash' );
+// copy and paste vens-dash as the specified appName
+const copyDashFiles = async ( dest, successMsg="", filter) => {
+    const options = filter? {filter} : undefined;
+    try {
+        await fse.copy(vensDashPath, dest, options );
+        successMsg && log.info(successMsg);
+    } catch (err) {
+        console.error(err);
+    }
+};
 
 // take the name of the dashboard app
 const validName = rawName => {
@@ -12,30 +31,26 @@ const validName = rawName => {
     return name;
 };
 
-// copy and paste vens-dash as the specified appName
-const copyFiles = async ( dest, successMsg="") => {
-    try {
-        await fse.copy(srcPath, dest);
-        successMsg && console.log(successMsg);
-    } catch (err) {
-        console.error(err);
-    }
-};
 
 // modify package name
-const giveAppName = async destPath => {
+const formatPkg = async destPath => {
     const appName = path.basename(destPath);
-    const withNameReplaced = data => data.replace(
-        /"name": "vens-dash",/g,
-        `"name": "${appName}",`
-    );
+    const formatPkgStr = data => data
+        .replace(
+            /"name": "vens-dash",/g,
+            `"name": "${appName}",`
+        )
+        .replace(
+            /"author": ".*",/g,
+            `"author": "",`
+        );
     // const promises = ['package.json','package-lock.json'].map( pkgFile => {
     const promiseReplacePkgName = (pkgPath, resolve, reject) => {
         fs.readFile(pkgPath, 'utf8', (err, data) => {
-            if (err) { console.log(err); return reject();}
-            const formatted = withNameReplaced(data);
+            if (err) { log.error(err); return reject();}
+            const formatted = formatPkgStr(data);
             fs.writeFile(pkgPath, formatted, 'utf8', (err) => {
-                if (err) { console.log(err); return reject();}
+                if (err) { log.error(err); return reject();}
                 return resolve();
             });
         });
@@ -69,20 +84,21 @@ Suggestion to continue:
 
     cd ./${destRelPath}
     npm install
-    npm run build-start "./path/to/sd/model.mdl"
+    npm run init-start "./path/to/sd/model.mdl"
 
 `
         );
-        // console.log(`copying files:\nfrom: ${srcPath}\nto: ${destPath}`);
-        await copyFiles(destPath, successMsg);
-        await giveAppName(destPath);
+        // log.info(`copying files:\nfrom: ${vensDashPath}\nto: ${destPath}`);
+        await copyDashFiles(destPath, successMsg, dashFilter);
+        await formatPkg(destPath);
         // installAppReq();
     })();
 }   
 
 module.exports = {
     validName,
-    copyFiles,
-    giveAppName
-}
+    dashFilter,
+    copyDashFiles,
+    formatPkg
+};
 

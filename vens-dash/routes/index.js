@@ -1,6 +1,6 @@
 /** loads routers for the app */
-module.exports = db => ({
+module.exports = (db, readOnly) => ({
     pages: require('./pages'),
-    api: require('./api')(db),
+    api: require('./api')(db, readOnly),
     diagram: require('./diagrams')(db),
 });

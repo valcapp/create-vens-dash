@@ -1,8 +1,44 @@
+
+
+viewMode = typeof viewMode !== 'undefined'? viewMode: false;
+
+const toSourceLocally = ['c0','runs'];
+const isToSourceLocally = name => viewMode && toSourceLocally.includes(name);
+
+/** get resource with specific name, if locally is true it will look in localStorage */
+const getResource = (name, locally) => {
+    locally = locally || isToSourceLocally(name);
+    const isInLocalStorage = !!window.localStorage.getItem(name);
+    return locally && isInLocalStorage?
+        getResourceLocally(name)
+        :getResourceServer(name);
+};
+
+const saveResource = (name, content, locally) => {
+    locally = locally || isToSourceLocally(name);
+    return locally?
+        saveResourceLocally(name, content)
+        :saveResourceServer(name, content);
+};
+
+const getResourceLocally = (name) => {
+    console.info(`Loading resource '${name}' from local storage.`);
+    return Promise.resolve(
+        JSON.parse(window.localStorage.getItem(name))
+    );
+};
+
+const saveResourceLocally = (name, content) => {
+    console.info(`Saving resource '${name}' on local storage.`);
+    window.localStorage.setItem(name, JSON.stringify(content));
+    return Promise.resolve();
+};
+
 /** get fetch resource /api/:name and return json */
-const getResource = (name) => fetch('/api/'+name)
+const getResourceServer = (name) => fetch('/api/'+name)
     .then( res => {
         if (res.ok) {
-            console.log('Fetched ui data for: '+name)
+            console.log('Fetched ui data for: '+name);
             return res.json();
         }
     })
@@ -11,8 +47,8 @@ const getResource = (name) => fetch('/api/'+name)
         console.error(err);
     });
     
-    /** put fetch some json content to /api/:name resource  */
-const saveResource = (name, content) => fetch('/api/'+name, {
+/** put fetch some json content to /api/:name resource  */
+const saveResourceServer = (name, content) => fetch('/api/'+name, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(content)
@@ -39,7 +75,7 @@ const saveResources = resources => Promise.all(
  * it's called when there is no mdl.json data on the server
  * so the the data are created on the spot by parsing the mdlstr
 */
-const fillTheGap = async () => {
+const fetchReadMdlStr = async () => {
     await sim.ready;
     const mdlstr = await getResource('mdlstr');
     const { mdl, c0 } = await readMdl({ sim, mdlstr });
@@ -53,7 +89,7 @@ const uiCache = (async () => {
         const data = cache[rsc] = await getResource(rsc);
         const isMissing = ( !data || !Object.keys(data).length );
         if ( isMissing ){
-            cache = await fillTheGap();
+            cache = await fetchReadMdlStr();
             // side effect, next time there will be no gap to fill
             saveResources(cache);
             break;
@@ -69,7 +105,7 @@ const UiData = async name => {
     const data = cache[name] || await getResource(name);
     // we define the save method ont the prototype to use it without passing this
     Object.defineProperty(data, 'save', {
-        enumerable: false,
+        enumerable: false, // to avoid it to be saved in json dumping operations
         value: () => saveResource(name, data)
     });
     return data;
@@ -84,6 +120,7 @@ const saveAndAlert = (saveFunc, label) => {
         console.error(err);
     });
 };
+
 /** fetches array of resources and add listener to .saveUI button to save updateTarget */
 const connectUiData = async ( resources, updateTarget ) => {
     const uiData = {};
@@ -101,6 +138,8 @@ const connectUiData = async ( resources, updateTarget ) => {
     );
     return uiData;
 };
+
+
 
 // /** Returns the fetched data with an extra prototype method to save it back */
 // const UiData = async name => {

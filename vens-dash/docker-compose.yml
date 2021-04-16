@@ -1,13 +1,13 @@
 version: '3'
 services:
   web:
-    build: .
+    dash-init: .
     ports:
       - "3000:3000"
     # volumes:
-    #   - vens-data: /app/db
+    #   - vens-data: /app/dash-data
     volumes:
-      - ./db:/app/db
+      - ./dash-data:/app/dash-data
 
 # volumes:
 #   vens-data:

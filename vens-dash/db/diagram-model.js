@@ -2,7 +2,7 @@
 const path = require('path'),
     fs = require('fs'),
     sizeOf = require('image-size');
-const imgDir = path.resolve(__dirname,'../db/img');
+const imgDir = path.resolve(__dirname,'../dash-data/img');
 
 // const read = () => {
 

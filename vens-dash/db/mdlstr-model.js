@@ -7,7 +7,7 @@ module.exports = (() => {
         let mdlstr = "";
         try {
             mdlstr = fs.readFileSync(
-                path.resolve(__dirname,'../db/mdl/mdlstr.json'), "utf-8"
+                path.resolve(__dirname,'../dash-data/mdl/mdlstr.json'), "utf-8"
             );
         } catch (err) {
             console.error(err);

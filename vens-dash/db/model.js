@@ -2,8 +2,8 @@
 const fs = require('fs');
 const path = require('path');
 
-const dbPath = path.resolve(__dirname,'../db/json/');
-const loc = name => path.resolve(dbPath, name+'.json');
+const dashDataPath = path.resolve(__dirname,'../dash-data/json/');
+const loc = name => path.resolve(dashDataPath, name+'.json');
 
 /** return data object that can read and write the file <name>.json of the porject in the database */
 function Model(name, defaultObj, /*view,*/ overwrite){

@@ -10,7 +10,7 @@ module.exports = ({docs}) => {
     const router = express.Router();
     router.use(express.urlencoded({ extended: true}));
 
-    const imgDir = path.resolve(__dirname,'../db/img');
+    const imgDir = path.resolve(__dirname,'../dash-data/img');
 
     const multerStorage = multer.diskStorage({
         destination: (req, file, callback) => {
@@ -19,7 +19,7 @@ module.exports = ({docs}) => {
                 .find( f => path.parse(f).name === reqName );
             prevDiagram &&
                 fs.unlinkSync(path.join( imgDir, prevDiagram ) );
-            callback(null, 'db/img');
+            callback(null, 'dash-data/img');
         },
         filename: (req, file, callback) => {
             const reqName = req.params.name;

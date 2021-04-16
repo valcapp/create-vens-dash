@@ -4,15 +4,15 @@
     "description": "An app that generates and runs an interface on top of a system-dynamics model.",
     "main": "app.js",
     "scripts": {
-        "build": "node build",
-        "reset": "node build fromScratch",
-        "start": "node app openAtStart",
-        "build-start": "node app mdlChanged openAtStart",
-        "reset-start": "node app fromScratch mdlChanged openAtStart",
-        "view": "node app viewMode",
-        "dev": "nodemon -L app.js",
-        "dev-view": "nodemon -L app.js viewMode",
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "dash-init": "node dash-init",
+        "dash-reset": "node dash-init fromScratch",
+        "start": "node server openAtStart",
+        "init-start": "node server mdlChanged openAtStart",
+        "reset-start": "node server fromScratch mdlChanged openAtStart",
+        "view": "node app",
+        "dev": "nodemon -L server.js",
+        "dev-view": "nodemon -L app.js",
+        "test": "jest"
     },
     "nodemonConfig": {
         "ignore": [
@@ -37,11 +37,14 @@
         "image-size": "^0.8.3",
         "jquery": "^3.5.1",
         "jsdom": "^16.2.2",
+        "loglevel": "^1.7.1",
         "multer": "^1.4.2",
         "open": "^7.0.4"
     },
     "devDependencies": {
+        "cors": "^2.8.5",
+        "jest": "^26.6.3",
         "nodemon": "^2.0.7",
-        "cors": "^2.8.5"
+        "supertest": "^6.1.3"
     }
 }

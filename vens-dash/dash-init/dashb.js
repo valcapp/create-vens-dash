@@ -2,32 +2,40 @@ const path = require("path");
 const fs = require("fs").promises;
 const { JSDOM } = require("jsdom");
 const jquery = require('jquery');
-const dashbPath = path.resolve(__dirname + '/../db/json/dashb.json');
-const modLoc = './build/dashb';
+const dashbPath = path.resolve(__dirname + '/../dash-data/json/dashb.json');
+const log = require('loglevel').getLogger(
+    path.basename(__dirname)+'/'+
+    path.basename(__filename).split('.')[0]
+);
 
 /** check existance of file */
 const isThere = async pth => (
     fs.stat(pth)
     .then(st => st.isFile())
-    .catch(e => console.log(`${modLoc}: Not Exists: ${e.path}`))
+    .catch(err => log.info(log.name, `Not Exists: ${err.path}`))
 );
 
 /** extract list of sliders and charts from index.html published by Vnesim */
-const readVensimIndexHTML = async() => {
+const readVensimIndexHTML = async (sources) => {
     const sliders = [];
     const charts = [];
-    const sourcePath = path.join(process.env.SD_PATH, 'web', 'index.html');
+    const sdPath = sources.SD_PATH; 
+    const sourcePath = path.join( sdPath, 'web', 'index.html');
     if (await isThere(sourcePath)) {
         try {
-            const { window } = await JSDOM.fromFile(sourcePath);
-            const $ = jquery(window);
+            const dom = await JSDOM.fromFile(sourcePath);
+            const $ = jquery(dom.window);
             $(".io-slider-slide").each(function() {
                 sliders.push($(this).attr('name'));
             });
             $(".io-chart").each(function() {
                 charts.push($(this).attr('name'));
             });
-        } catch (err) { console.error(`\nError reading ${sourcePath}:\n`, err); }
+        } catch (err) {
+            // info bcs it fails with jest but not when running normally, not essential in productio either
+            log.info(log.name,`Error reading ${sourcePath}:\n`);
+            log.debug( log.name, err);
+        }
     };
     return {
         sliders: sliders.filter(x => x),
@@ -51,15 +59,15 @@ const confirmOverwrite = () => {
 
 /** generates a dashboard configuration file in the database
  * from sd/web/index.html (published by Vensim) */
-module.exports = async(overwrite = false) => {
+const writeDashb = async (sources, overwrite = false) => {
     // check if the config file exists already
-    alreadyThere = await isThere(dashbPath);
+    const alreadyThere = await isThere(dashbPath);
     if (alreadyThere) {
         if (overwrite) {
             const confirmation = await confirmOverwrite();
-            if (!confirmation) { return; }
+            if (!confirmation) return;
         } else {
-            console.log(`${modLoc}: Skipped: ${dashbPath}`);
+            log.info(log.name, `Skipped: ${dashbPath}`);
             return;
         }
     }
@@ -68,13 +76,19 @@ module.exports = async(overwrite = false) => {
     const dashbViews = {
         tabs: [{
             name: 'main',
-            ...await readVensimIndexHTML()
+            ...await readVensimIndexHTML(sources)
         }]
     };
 
     // save the config on file
     return fs.writeFile(dashbPath,
             JSON.stringify(dashbViews, null, 3)
-        ).then(() => console.log(`${modLoc}: Written: ${dashbPath}`))
+        ).then(() => log.info(log.name,`Written: ${dashbPath}`))
         .catch(err => console.error(err));
 };
+
+module.exports = writeDashb;
+
+if (require.main === module){
+    writeDashb({ SD_PATH: path.resolve('./sd')},true);
+}
